@@ -10,3 +10,8 @@ my_list.append(5)
 print(my_list)
 my_list.print_sorted()
 print(my_list)
+
+guillaume@ubuntu:~/$ ./1-main.py
+[1, 4, 2, 3, 5]
+[1, 2, 3, 4, 5]
+[1, 4, 2, 3, 5]
