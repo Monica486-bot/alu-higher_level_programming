@@ -1,18 +1,23 @@
 #!/usr/bin/python3
-"""defines class BaseGeometry
-with public instance methods for area and ineger validation"""
+"""defines class Rectangle that inherits from BaseGeometry"""
 
+BaseGeometry = _import_('7-base_geometry').BaseGeometry
 
-class BaseGeometry:
-    """class with public instance method to raise exception
-    and public instance method to validate integer"""
+class Rectangle(BaseGeometry):
+    """class for rectangle that inherits from BaseGeometry
+    with print() and str() ability"""
+    def _init_(self, width, height):
+        """initializes Rectangle instance"""
+        self.integer_validator("width", width)
+        self.__width = width
+        self.integer_validator("height", height)
+        self.__height = height
+
+    def _str_(self):
+        """string representation of Rectangle"""
+        str_rep = "[Rectangle] " + str(self._width) + "/" + str(self._height)
+        return str_rep
+
     def area(self):
-        """raises exception that area method is not implemented"""
-        raise Exception("area() is not implemented")
-
-    def integer_validator(self, name, value):
-        """validates integer"""
-        if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
-        if value <= 0:
-            raise ValueError("{} must be greater than 0".format(name))
+        """returns area of rectangle"""
+        return (self._width * self._height)
