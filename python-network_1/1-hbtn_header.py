@@ -1,30 +1,13 @@
 #!/usr/bin/python3
-"""Script that fetches https://intranet.hbtn.io/status."""
+"""
+Python script that takes in a URL, sends a request and displays
+the value of the X-Request-Id variable found in the header
+"""
+import urllib.request
+import sys
 
-if __name__ == '__main__':
-    import urllib.request
-    from urllib.error import HTTPError
 
-    try:
-        with urllib.request.urlopen('https://intranet.hbtn.io/status') as resp:
-            content = resp.read()
-            print("Body response:")
-            print("\t- type: {}".format(type(content)))
-            print("\t- content: {}".format(content))
-            print("\t- utf8 content: {}".format(content.decode('utf-8')))
-    except HTTPError as e:
-        print("[Got]")
-        print("HTTP Error: {}".format(e))
-        print("(38 chars long)")
-        print("[stderr]:")
-        print("(0 chars long)")
-        print("[Expected]")
-        print("Body response:")
-        print("\t- type: <class 'bytes'>")
-        print("\t- content: b'OK'")
-        print("\t- utf8 content: OK")
-        print("(78 chars long)")
-        print("[stderr]: [Anything]")
-        print("(0 chars long)")
-        if e.code == 403:
-            print("Access to the resource is forbidden.")
+if __name__ == "__main__":
+    with urllib.request.urlopen(sys.argv[1]) as response:
+        html = response.info()
+        print(html.get('X-Request-Id'))
